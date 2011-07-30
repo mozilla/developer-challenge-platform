@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   def new
     if current_user.profile
-      redirect_to :root
+      redirect_back_or_default :root
     else
       @profile = Profile.new
     end

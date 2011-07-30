@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
   def create
     @user = User.new(params[:user])
     if user = User.find_by_email(@user.email) and user.authenticate(@user.password)
+      cookies.signed[:_mozchallenge_auth] = {
+        :value => user.auth_token, 
+        :httponly => true
+      }
       redirect_back_or_default(:root)
     else
       @user.errors.add :password, 'Wrong'
@@ -15,8 +19,10 @@ class SessionsController < ApplicationController
   end
   
   def browser_id
+    store_location(params[:location])
+    
     res = JSON.parse(
-      RestClient.post('https://browserid.org/verify', :assertion => params[:assertion], :audience => 'mozchallenge.dev')
+      RestClient.post('https://browserid.org/verify', :assertion => params[:assertion], :audience => request.host)
     )
     
     if res['status'] == 'okay'

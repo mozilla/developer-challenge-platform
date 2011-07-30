@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     
     alias :logged_in? :current_user
     
-    def store_location
-      session[:return_to] = request.fullpath
+    def store_location(location=request.fullpath)
+      session[:return_to] = location unless session[:return_to]
     end
 
     def redirect_back_or_default(default)
@@ -21,6 +21,9 @@ class ApplicationController < ActionController::Base
     end
     
     def authorize_user
-      redirect_to :new_session, :notice => 'You need to log in to do that' unless logged_in?
+      unless logged_in?
+        store_location
+        redirect_to :new_session, :notice => 'You need to log in to do that'
+      end
     end
 end
