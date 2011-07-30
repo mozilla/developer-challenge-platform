@@ -25,11 +25,30 @@ Mozchallenge::Application.routes.draw do
   #     end
   #   end
   
-  resources :users
+  resource :community, :controller => :community
+  
+  resources :users do
+    resource :profile, :controller => :profiles, :as => :profiles
+  end
+  
+  resources :challenges do
+    resources :attempts
+  end
+  
   resource :session, :controller => :sessions do
     collection do
       post :browser_id
     end
+  end
+  
+  namespace :admin do
+    root :to => 'challenges#index'
+    resources :challenges do
+      member do
+        post :activate
+      end
+    end
+    resources :users
   end
   
   # Sample resource route with sub-resources:

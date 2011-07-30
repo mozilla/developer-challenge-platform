@@ -11,6 +11,9 @@ group :assets do
   gem 'uglifier'
 end
 gem 'jquery-rails'
+gem 'colored'
+gem 'state_machine'
+gem 'rest-client'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

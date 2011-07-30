@@ -8,10 +8,35 @@
   <%= yield :head %>
 </head>
 <body>
+  
+  <header>
+    <div style="float:left">
+      <h1>moz challenge</h1>
+      <h2>Solve development problems as a community</h2>
+    </div>
+    <div style="float:right; text-align:right">
+      <div>
+        <% if logged_in? %>
+          <%= link_to 'Log out', :session , :method => :delete %> <%= gravatar_for(current_user.email, :size => 16) %> <%= current_user.email %>
+        <% else %>  
+          <%= link_to image_tag('sign_in_green.png', :id => 'sign-in-button'), '#', :id => 'sign-in' %>
+        <% end %>
+      </div>
+      <nav>
+        <%= link_to 'Home', :root %> | <%= link_to 'Community', :community %> 
+        <% if logged_in? and current_user.admin? %> | <%= link_to 'Admin', :admin_root %><% end %>
+      </nav>
+    </div>
+    <br clear="all"/>
+  </header>
+  
   <%= yield %>
   
+  <footer>
+    <small>&copy; 2011 Mozilla Labs. All rights reserved</small>
+  </footer>
+  
   <%= javascript_include_tag 'https://browserid.org/include.js' unless logged_in? %>
-  <%= link_to image_tag('sign_in_green.png'), '#', :id => 'sign-in' %>
   <%= yield :bottom_script %>
 </body>
 </html>

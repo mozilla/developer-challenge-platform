@@ -1,0 +1,6 @@
+<h1>Submit your challenge</h1>
+
+<%= form_for @challenge do |f| %>
+  <%= render :partial => 'challenge_form', :locals => {:f => f} %>
+  <%= f.submit 'Submit' %>
+<% end %>

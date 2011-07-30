@@ -20,9 +20,7 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
     end
     
-    def generate_token(column)
-      begin
-        self[column] = SecureRandom.urlsafe_base64
-      end while User.exists?(column => self[column])
+    def authorize_user
+      redirect_to :root, :notice => 'You need to log in to do that' unless logged_in?
     end
 end

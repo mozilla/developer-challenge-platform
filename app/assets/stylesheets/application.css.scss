@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section, time {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline; }
+
+article, aside, dialog, figure, figcaption, footer, header, hgroup, nav, section {
+  display: block; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: separate;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal; }
+
+table, td, th {
+  vertical-align: middle; }
+  
+body {
+  width:900px;
+  margin:0 auto;
+  font: 13.34px helvetica,arial,freesans,clean,sans-serif;
+  line-height: 1.4;
+}
+
+header {
+  background-color:#eaeaea;
+  margin-bottom:10px;
+  padding:10px;
+  
+  h2 {
+    font-weight:normal;
+    font-size: 12px;
+  }
+}
+
+header {
+  nav {
+    margin-top:10px;
+  }
+}
+
+footer {
+  background-color:#333333;
+  color:#e4e4e4;
+  margin-top:30px;
+  padding:5px;
+}
+
+h1 {
+  margin: 10px 0 10px 0;
+  font-size: 20px;
+  font-weight: normal;
+  height: 28px;
+  letter-spacing: -1px;
+}
+
+h2 {
+  font-size:16px;
+  margin-top:10px;
+}

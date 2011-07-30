@@ -2,6 +2,9 @@ $(document).ready(function() {
   
   $('#sign-in').click(function() {
     
+    $('#sign-in').attr('disabled', 'disabled');
+    $('#sign-in-button').attr('src', '/assets/sign_in_grey.png');
+    
     navigator.id.getVerifiedEmail(function(assertion) {
         if (assertion) {
             // This code will be invoked once the user has successfully
@@ -14,7 +17,7 @@ $(document).ready(function() {
     });
 
     function browser_id_success(data) {
-      alert(data);
+      location.href = data.next;
     }
 
   });

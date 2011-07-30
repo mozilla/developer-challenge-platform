@@ -1,0 +1,9 @@
+<% if @featured_challenge %>
+  <h1><%= link_to @featured_challenge.title, @featured_challenge %></h1>
+  <div class="byline">by <%= link_to @featured_challenge.user.username, @featured_challenge.user %> <%= @featured_challenge.days_remaining %> days remaining</div>
+  <p><%= @featured_challenge.abstract %></p>
+<% end %>
+
+<% @recent_challenges.each do |challenge| %>
+  <div><%= challenge.title %> <%= challenge.ends_at.to_date.to_s(:long) %></div>
+<% end %>

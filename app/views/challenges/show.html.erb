@@ -1,0 +1,11 @@
+<h1><%= @challenge.title %></h1>
+
+<p><%= @challenge.abstract %></p>
+
+<div>
+  <% if @challenge.open? %>
+    <%= link_to 'Enter your solution', new_challenge_attempt_path(@challenge) %>
+  <% else %>
+    <i>This challenge is not currently accepting solutions</i>
+  <% end %>
+</div>

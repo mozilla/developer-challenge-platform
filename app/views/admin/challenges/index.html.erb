@@ -1,0 +1,34 @@
+<%= render 'nav' %>
+
+<% if @challenges.present? %>
+
+  <table width="100%">
+    <tr>
+      <th>Challenge Title</th>
+      <th>State</th>
+      <th>Starts</th>
+      <th>Ends</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @challenges.each do |challenge| %>
+      <tr>
+        <td><%= link_to challenge.title %></td>
+        <td><%= challenge.state.upcase %></td>
+        <td><%= challenge.starts_at.to_s(:short) %></td>
+        <td><%= challenge.ends_at.to_s(:short) %></td>
+        <td>
+          <% unless challenge.active? %>
+            <%= link_to 'activate', activate_admin_challenge_path(challenge), :method => :post %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+<% else %>
+  <i>There are currently no challenges</i>
+<% end %>
+
+<div><%= link_to 'Create a challenge', :new_admin_challenge %></div>

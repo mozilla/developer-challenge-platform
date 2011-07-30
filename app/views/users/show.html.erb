@@ -1,0 +1,11 @@
+<h1><%= @user.name %> (<%= @user.username %>)</h1>
+
+<p><%= @user.profile.bio %></p>
+
+<% if @user.profile.website.present? %>
+  Website: <%= link_to @user.profile.website, @user.profile.website %>
+<% end %>
+
+<% if @user.profile.twitter.present? %>
+  Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %>
+<% end %>
