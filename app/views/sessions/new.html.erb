@@ -3,5 +3,5 @@
 <%= form_for @user, :url => :session do |f| %>
   <div><label>Email</label><%= f.text_field :email %></div>
   <div><label>Password</label><%= f.password_field :password %></div>
-  <div><%= f.submit 'Log in' %></div>
+  <div><%= f.submit 'Log in' %> or <%= link_to 'Sign up', '#', :onclick => "$('#sign-in').click()" %></div>
 <% end %>

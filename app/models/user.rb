@@ -4,8 +4,11 @@ class User < ActiveRecord::Base
   has_many :challenges
   has_many :attempts
   before_validation :generate_auth_token, :on => :create
-  delegate :username, :to => :profile
   delegate :name, :to => :profile
+  
+  def username
+    self.profile ? self.profile.username : self.email.split('@').first
+  end
   
   def to_param
     self.username ? self.username : self.id
