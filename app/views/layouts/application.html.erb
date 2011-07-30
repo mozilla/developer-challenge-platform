@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mozchallenge</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield :head %>
+</head>
+<body>
+  <%= yield %>
+  
+  <%= javascript_include_tag 'https://browserid.org/include.js' unless logged_in? %>
+  <%= link_to image_tag('sign_in_green.png'), '#', :id => 'sign-in' %>
+  <%= yield :bottom_script %>
+</body>
+</html>
