@@ -1,5 +1,7 @@
 <%= render 'nav' %>
 
+<h1>Challenges</h1>
+
 <%= render :partial => 'challenges_table', :locals => {:challenges => @challenges} %>
 
 <div><%= link_to 'Create a challenge', :new_admin_challenge %></div>

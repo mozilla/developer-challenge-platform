@@ -3,6 +3,7 @@ class Challenge < ActiveRecord::Base
   belongs_to :level
   belongs_to :category
   belongs_to :platform
+  has_many :attempts
   
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
   
@@ -32,7 +33,7 @@ class Challenge < ActiveRecord::Base
   end
   
   def open?
-    self.active? and Time.now.utc > self.starts_at and Time.now.utc < self.ends_at
+    self.active? #and Time.now.utc > self.starts_at and Time.now.utc < self.ends_at
   end
   
   def days_remaining

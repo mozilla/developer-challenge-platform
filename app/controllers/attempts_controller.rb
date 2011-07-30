@@ -1,4 +1,5 @@
 class AttemptsController < ApplicationController
+  before_filter :authorize_user
   before_filter :challenge_requried
   
   def new
@@ -16,6 +17,6 @@ class AttemptsController < ApplicationController
   
   private
     def challenge_requried
-      @challenge = Challenge.find_by_id(params[:challenge_id])
+      @challenge = Challenge.find_by_id!(params[:challenge_id])
     end
 end

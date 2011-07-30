@@ -1,4 +1,19 @@
 class SessionsController < ApplicationController
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(params[:user])
+    if user = User.find_by_email(@user.email) and user.authenticate(@user.password)
+      redirect_back_or_default(:root)
+    else
+      @user.errors.add :password, 'Wrong'
+      @user.errors.add :email unless user
+      render :new
+    end
+  end
+  
   def browser_id
     res = JSON.parse(
       RestClient.post('https://browserid.org/verify', :assertion => params[:assertion], :audience => 'mozchallenge.dev')

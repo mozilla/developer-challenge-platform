@@ -2,7 +2,7 @@
 
 <p><%= link_to 'Submit your ideas for challenges', :new_challenge %> or vote for your favourite user-submitted challenges.</p>
 
-<h2>Popular submissions</h2>
+<h2>Recent community submissions</h2>
 
 <% @challenges.each do |challenge| %>
   <div><%= link_to challenge.title, challenge %> by <%= link_to challenge.user.username, challenge.user %></div>

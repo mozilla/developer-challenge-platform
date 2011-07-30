@@ -9,3 +9,9 @@
 <% if @user.profile.twitter.present? %>
   Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %>
 <% end %>
+
+<h2>Challenges attempted</h2>
+
+<% @user.attempts.each do |attempt| %>
+  <div><%= link_to attempt.challenge.title, attempt.challenge %></div>
+<% end %>

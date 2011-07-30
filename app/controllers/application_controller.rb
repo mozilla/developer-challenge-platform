@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
     end
     
     def authorize_user
-      redirect_to :root, :notice => 'You need to log in to do that' unless logged_in?
+      redirect_to :new_session, :notice => 'You need to log in to do that' unless logged_in?
     end
 end

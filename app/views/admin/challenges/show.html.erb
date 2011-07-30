@@ -3,3 +3,9 @@
 <h1><%= @challenge.title %></h1>
 
 <p>by <%= link_to @challenge.user.username, [:admin, @challenge.user] %></p>
+
+<h2>Challenge attempts</h2>
+
+<% @challenge.attempts.each do |attempt| %>
+  <%= gravatar_for(attempt.user.email) %>
+<% end %>

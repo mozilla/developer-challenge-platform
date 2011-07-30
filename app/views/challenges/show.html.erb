@@ -9,3 +9,9 @@
     <i>This challenge is not currently accepting solutions</i>
   <% end %>
 </div>
+
+<h2>Challenge attempts</h2>
+
+<% @challenge.attempts.each do |attempt| %>
+  <%= link_to gravatar_for(attempt.user.email), attempt.user %>
+<% end %>
