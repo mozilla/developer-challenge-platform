@@ -1,0 +1,5 @@
+<%= render :partial => 'nav' %>
+
+<h1><%= @challenge.title %></h1>
+
+<p>by <%= link_to @challenge.user.username, [:admin, @challenge.user] %></p>

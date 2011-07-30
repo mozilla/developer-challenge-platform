@@ -9,5 +9,6 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :twitter
       t.timestamps
     end
+    add_index :profiles, :username
   end
 end

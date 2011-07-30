@@ -1,0 +1,20 @@
+<%= render :partial => 'nav' %>
+
+<h1><%= @user.name %> (<%= @user.username %>)</h1>
+
+<h2>Roles</h2>
+
+<%= form_for [:admin, @user] do |f| %>
+  <%= f.check_box :admin %> Admin
+  <%= f.check_box :judge %> Judge
+  <%= f.check_box :reviewer %> Reviewer
+  <%= f.submit 'save' %>
+<% end %>
+
+<h2>Challenges created</h2>
+
+<%= render :partial => 'admin/challenges/challenges_table', :locals => {:challenges => @user.challenges} %>
+
+<h2>Challenge attempts</h2>
+
+TODO

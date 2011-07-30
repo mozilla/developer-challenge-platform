@@ -8,7 +8,7 @@
   </tr>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.name %> (<%= user.username %>)</td>
+      <td><%= link_to user.name, [:admin, user] %> (<%= user.username %>)</td>
       <td><%= user.email %></td>
       <td>
         <%= user.admin? ? 'Admin' : '' %>

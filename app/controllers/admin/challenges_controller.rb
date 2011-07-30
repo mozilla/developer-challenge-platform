@@ -10,12 +10,6 @@ class Admin::ChallengesController < Admin::BaseController
     )
   end
   
-  def activate
-    @challenge = Challenge.find_by_id!(params[:id])
-    @challenge.activate!
-    redirect_to :admin_challenges
-  end
-  
   def create
     @challenge = Challenge.new(params[:challenge].merge(
       :user => current_user,
@@ -27,4 +21,15 @@ class Admin::ChallengesController < Admin::BaseController
       render :new
     end
   end
+  
+  def show
+    @challenge = Challenge.find_by_id!(params[:id])
+  end
+  
+  def activate
+    @challenge = Challenge.find_by_id!(params[:id])
+    @challenge.activate!
+    redirect_to :admin_challenges
+  end
+  
 end
