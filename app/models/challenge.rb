@@ -5,6 +5,8 @@ class Challenge < ActiveRecord::Base
   belongs_to :platform
   belongs_to :duration
   has_many :attempts
+  has_many :reviews
+  has_many :reviewers, :through => :reviews, :source => :user
   
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
   
@@ -20,8 +22,11 @@ class Challenge < ActiveRecord::Base
     event :activate do
       transition [:pending] => :active
     end
+    event :review do
+      transition [:active] => :reviewing
+    end
     event :judge do
-      transition [:active] => :judging
+      transition [:reviewing] => :judging
     end
     event :finish do
       transition [:judging] => :finished
@@ -33,6 +38,10 @@ class Challenge < ActiveRecord::Base
   
   def active?
     self.state == 'active'
+  end
+  
+  def reviewing?
+    self.state == 'reviewing'
   end
   
   def open?
@@ -55,6 +64,18 @@ class Challenge < ActiveRecord::Base
   def feature!
     Challenge.featured.each{|x| x.update_attribute(:feature, false)}
     self.update_attribute(:feature, true)
+  end
+  
+  def assign_reviewer(admin_user, reviewer)
+    @attempts = self.attempts.sort{|x| x.reviews.count}[0..19] # TODO: counter cache
+    @attempts.each do |attempt| 
+      attempt.reviews.create!(:user => reviewer, :challenge => attempt.challenge)
+      # TODO: store the admin user in the review and send message in Review after_create
+      Message.create!( 
+        :sender => admin_user, :recipient_username => reviewer.username, :recipient => reviewer, 
+        :subject => "Review assigned for #{attempt.challenge.title}", :body => 'Check your profile'
+      )
+    end
   end
   
   private

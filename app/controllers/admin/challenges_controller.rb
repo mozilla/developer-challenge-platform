@@ -42,6 +42,14 @@ class Admin::ChallengesController < Admin::BaseController
     redirect_to :admin_challenges
   end
   
+  def assign_reviewers
+    reviewers = User.find(params[:user_id])
+    reviewers.each do |reviewer|
+      @challenge.assign_reviewer(current_user, reviewer) unless @challenge.reviewers.include? reviewer
+    end
+    redirect_to [:admin, @challenge]
+  end
+  
   private
     def challenge_requried
       @challenge = Challenge.find_by_id!(params[:id])

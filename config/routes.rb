@@ -32,7 +32,9 @@ Mozchallenge::Application.routes.draw do
   end
   
   resources :challenges do
-    resources :attempts
+    resources :attempts do
+      resources :reviews
+    end
   end
   
   resource :session, :controller => :sessions do
@@ -50,6 +52,7 @@ Mozchallenge::Application.routes.draw do
       member do
         post :activate
         post :feature
+        post :assign_reviewers
       end
     end
     resources :users

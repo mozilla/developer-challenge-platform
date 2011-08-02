@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'colored'
 gem 'state_machine'
 gem 'rest-client'
+gem 'oa-oauth'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

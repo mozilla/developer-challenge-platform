@@ -21,7 +21,18 @@
     <%= link_to attempt.challenge.title, attempt.challenge %> 
     <% if @user == current_user and attempt.challenge.open? %>
       <%= link_to 'Edit your entry', edit_challenge_attempt_path(attempt.challenge, attempt) %>
-      
     <% end %>
   </div>
+<% end %>
+
+<% if @user == current_user and current_user.reviewer? %>
+  <h2>Pending Reviews (<%= current_user.reviews.pending.count %>)</h2>
+  
+  <% @user.reviews.pending.each do |review| %>
+    <div>
+      <%= link_to "Attempt #{review.attempt.id}", [review.challenge, review.attempt] %> 
+      on <%= link_to review.challenge.title, review.challenge %> 
+      attempt by <%= link_to review.attempt.user.name, review.attempt.user %> (<%= review.attempt.user.username %>)
+    </div>
+  <% end %>
 <% end %>

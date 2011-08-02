@@ -2,6 +2,8 @@
 
 <h1><%= @user.name %> (<%= @user.username %>)</h1>
 
+<p><%= link_to 'Send a message', new_message_path(:recipient => @user.username) %>
+
 <h2>Roles</h2>
 
 <%= form_for [:admin, @user] do |f| %>
@@ -17,4 +19,12 @@
 
 <h2>Challenge attempts</h2>
 
-TODO
+<%= render :partial => 'admin/challenges/attempts_table', :locals => {:attempts => @user.attempts} %>
+
+<% if @user.reviewer? %>
+  <h2>Pending Reviews (<%= @user.reviews.pending.count %>)</h2>
+  
+  <% @user.reviews.pending.each do |review| %>
+    <div><%= "Attempt #{review.attempt.id}" %> on <%= link_to review.challenge.title, [:admin, review.challenge] %></div>
+  <% end %>
+<% end %>

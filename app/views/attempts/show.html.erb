@@ -1,0 +1,17 @@
+<h1>Attempt on <%= @attempt.challenge.title %> by <%= @attempt.user.name %></h1>
+
+Repository: <%= @attempt.repository_url %>
+
+<p><%= @attempt.description %></p>
+
+<% if current_user.reviewer? and review = current_user.reviewing?(@attempt) %>
+  
+  <h2>Review</h2>
+  
+  <%= form_for [@challenge, @attempt, review] do |f| %>
+    <div><label>Approve</label><%= f.radio_button :score, 1 %> Yes <%= f.radio_button :score, 0 %> No 
+    <div><label>Comment</label><%= f.text_area :comment %></div>
+    <div><%= f.submit 'Send' %></div>
+  <% end %>
+  
+<% end %>

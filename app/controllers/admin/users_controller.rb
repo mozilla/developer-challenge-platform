@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::BaseController
   
   def update
     @user = Profile.find_by_username!(params[:id]).try(:user)
-    @user.update_attributes(params[:user])
+    @user.update_attributes(params[:user], :as => :admin)
     redirect_to [:admin, @user]
   end
 end

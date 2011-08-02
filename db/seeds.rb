@@ -3,7 +3,11 @@
 admins = [
   'moomerman@gmail.com'
 ]
-admins.each{|x| User.create!(:email => x, :password => SecureRandom.urlsafe_base64, :admin => true)}
+admins.each do |x| 
+  user = User.new(:email => x, :password => SecureRandom.urlsafe_base64)
+  user.admin = true
+  user.save!
+end
 
 # Levels
 
@@ -43,3 +47,19 @@ durations = [
   ['1 week', 1.week], ['2 weeks', 2.weeks], ['3 weeks', 3.weeks], ['1 month', 1.month], ['2 months', 2.months]
 ]
 durations.each{|x, y| Duration.create!(:name => x, :duration => y)}
+
+# Reviewers
+10.times do |i| 
+  user = User.new(:email => "reviewer#{i}@mozdevchallenge.org", :password => 'reviewer')
+  user.reviewer = true
+  user.save!
+  Profile.create!(:user => user, :username => "reviewer#{i}", :name => "Reviewer #{i}")
+end
+
+# Judges
+10.times do |i| 
+  user = User.new(:email => "judge#{i}@mozdevchallenge.org", :password => 'judge')
+  user.judge = true
+  user.save!
+  Profile.create!(:user => user, :username => "judge#{i}", :name => "Judge #{i}")
+end

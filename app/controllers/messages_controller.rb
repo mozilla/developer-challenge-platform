@@ -10,16 +10,20 @@ class MessagesController < ApplicationController
   def new
     @message = Message.new
     @message.recipient_username = params[:recipient] if params[:recipient]
+    challenge = Challenge.find_by_id(params[:challenge_id]) if params[:challenge_id]
+    if challenge
+      @message.challenge = challenge 
+      @message.subject = challenge.title
+    end
   end
   
   def create
-    @message = Message.new(params[:message].merge(:sender => current_user))
-    @message.recipient = Profile.find_by_username(@message.recipient_username).try(:user)
-    if @message.save
-      redirect_to :messages
-    else
-      render :new
+    recipients = params[:message][:recipient_username].split(',')
+    recipients.each do |r|
+      recipient = Profile.find_by_username(r).try(:user)
+      Message.create!(params[:message].merge(:sender => current_user, :recipient => recipient)) if recipient and !recipient == current_user
     end
+    redirect_to :messages
   end
   
   def show

@@ -1,29 +1,15 @@
 <%= render :partial => 'nav' %>
 
-<h1><%= @challenge.title %></h1>
+<h1><%= @challenge.title %> [<%= @challenge.state %>]</h1>
 
 <p>by <%= link_to @challenge.user.username, [:admin, @challenge.user] %></p>
 
 <h2>Challenge attempts</h2>
 
 <% if @challenge.attempts.present? %>
-
-  <table width="100%">
-    <tr>
-      <th>User</th>
-      <th>Repository</th>
-      <th>Language</
-      <th>&nbsp;</th>
-    </tr>
-    <% @challenge.attempts.each do |attempt| %>
-      <tr>
-        <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
-        <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
-        <td><%= attempt.language.name %></td>
-      </tr>
-    <% end %>
-  </table>
-  
-<% else %>
-  <i>There are currently no attempts</i>
+  <%= link_to 'Message all entrants', new_message_path(:recipient => @challenge.attempts.collect{|x| x.user.username}.join(','), :challenge_id => @challenge.id) %>
 <% end %>
+
+<%= render :partial => 'attempts_table', :locals => {:attempts => @challenge.attempts} %>
+
+<%= render :partial => 'reviewing' if @challenge.reviewing? %>
