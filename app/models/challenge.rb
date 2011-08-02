@@ -3,6 +3,7 @@ class Challenge < ActiveRecord::Base
   belongs_to :level
   belongs_to :category
   belongs_to :platform
+  belongs_to :duration
   has_many :attempts
   
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
@@ -10,9 +11,10 @@ class Challenge < ActiveRecord::Base
   scope :community, where(:source => 'community')
   scope :active, where(:state => 'active')
   scope :finished, where(:state => 'finished')
+  scope :featured, where(:feature => true)
   
   state_machine :initial => :pending do
-    #after_transition :on => :activate, :do => :after_activate
+    after_transition :on => :activate, :do => :after_activate
 
     event :activate do
       transition [:pending] => :active
@@ -44,5 +46,20 @@ class Challenge < ActiveRecord::Base
   def to_param
     "#{self.id}-#{self.title.gsub(/[^[:alnum:]]/, '-').downcase}"
   end
+  
+  def ends_at
+    self.activated_at + self.duration.duration
+  end
+  
+  def feature!
+    Challenge.featured.each{|x| x.update_attribute(:feature, false)}
+    self.update_attribute(:feature, true)
+  end
+  
+  private
+    def after_activate
+      self.update_attribute(:activated_at, Time.now.utc)
+      feature!
+    end
   
 end

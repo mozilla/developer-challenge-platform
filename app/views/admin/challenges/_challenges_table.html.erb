@@ -5,7 +5,7 @@
       <th>Challenge Title</th>
       <th>Creator</th>
       <th>State</th>
-      <th>Starts</th>
+      <th>Duration</th>
       <th>Ends</th>
       <th>&nbsp;</th>
     </tr>
@@ -14,14 +14,18 @@
         <td><%= link_to challenge.title, [:admin, challenge] %></td>
         <td><%= link_to challenge.user.username, [:admin, challenge.user] %></td>
         <td><%= challenge.state.upcase %></td>
-        <td><%= challenge.starts_at.to_s(:short) %></td>
-        <td><%= challenge.ends_at.to_s(:short) %></td>
+        <td><%= challenge.duration.name %></td>
         <td>
-          <% unless challenge.active? %>
-            <%= link_to 'activate', activate_admin_challenge_path(challenge), :method => :post %>
+          <% if challenge.active? %>
+            <%= challenge.ends_at.to_date.to_s(:long) %></td>
           <% else %>
             -
           <% end %>
+        <td>
+          <% unless challenge.active? %>
+            <%= link_to 'activate', activate_admin_challenge_path(challenge), :method => :post %>  
+          <% end %>
+          <%= link_to 'edit', edit_admin_challenge_path(challenge) %>
         </td>
       </tr>
     <% end %>

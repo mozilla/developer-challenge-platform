@@ -1,0 +1,6 @@
+<h1>Edit Challenge</h1>
+
+<%= form_for [:admin, @challenge] do |f| %>
+  <%= render :partial => 'challenges/challenge_form', :locals => {:f => f} %>
+  <%= f.submit 'Save' %> or <%= link_to 'Cancel', :admin_root %>
+<% end %>

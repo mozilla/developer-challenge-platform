@@ -36,3 +36,10 @@ languages = [
   'C++', 'Java', 'VB.net', 'C#', 'Python', 'Ruby', 'Other'
 ]
 languages.each{|x| Language.create!(:name => x)}
+
+# Durations
+
+durations = [
+  ['1 week', 1.week], ['2 weeks', 2.weeks], ['3 weeks', 3.weeks], ['1 month', 1.month], ['2 months', 2.months]
+]
+durations.each{|x, y| Duration.create!(:name => x, :duration => y)}

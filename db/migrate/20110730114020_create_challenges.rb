@@ -5,15 +5,16 @@ class CreateChallenges < ActiveRecord::Migration
       t.references :level, :null => false
       t.references :category, :null => false
       t.references :platform, :null => false
+      t.references :duration, :null => false
       
-      t.string :source, :null => false
-      t.string :state, :null => false
-      t.string :title, :null => false
-      t.text   :abstract, :null => false
-      t.text   :resources
+      t.string   :source, :null => false
+      t.string   :state, :null => false
+      t.string   :title, :null => false
+      t.text     :abstract, :null => false
+      t.text     :resources
+      t.datetime :activated_at
+      t.boolean  :feature, :default => false, :null => false
       
-      t.datetime :starts_at, :null => false
-      t.datetime :ends_at, :null => false
       t.timestamps
     end
     add_index :challenges, :source
