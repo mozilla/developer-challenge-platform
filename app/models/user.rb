@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :sent_messages, :foreign_key => 'sender_id', :class_name => 'Message'
   has_many :received_messages, :foreign_key => 'recipient_id', :class_name => 'Message'
   has_many :reviews
+  has_many :judgings
   
   before_validation :generate_auth_token, :on => :create
   validates_uniqueness_of :email
@@ -39,6 +40,10 @@ class User < ActiveRecord::Base
   
   def reviewing?(attempt)
     self.reviews.where(:attempt_id => attempt.id).first
+  end
+  
+  def judging?(attempt)
+    self.judgings.where(:attempt_id => attempt.id).first
   end
   
   private

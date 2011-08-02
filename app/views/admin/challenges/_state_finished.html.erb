@@ -1,0 +1,21 @@
+<h2>Results</h2>
+
+<table width="100%">
+  <tr>
+    <th>Attempt/Challenge</th>
+    <th>User</th>
+    <th>Repository</th>
+    <th>Language</th>
+    <th>Final score</th>
+    <th>&nbsp;</th>
+  </tr>
+  <% @challenge.attempts.shortlisted.sort{|x| x.judge_score}.each do |attempt| %>
+    <tr>
+      <td>Attempt <%= attempt.id %> on <%= link_to attempt.challenge.title, [:admin, attempt.challenge] %></td>
+      <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
+      <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
+      <td><%= attempt.language.name %></td>
+      <td><%= attempt.judge_score %></td>
+  <% end %>
+</table>
+

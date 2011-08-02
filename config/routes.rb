@@ -34,6 +34,7 @@ Mozchallenge::Application.routes.draw do
   resources :challenges do
     resources :attempts do
       resources :reviews
+      resources :judgings
     end
   end
   
@@ -51,8 +52,12 @@ Mozchallenge::Application.routes.draw do
     resources :challenges do
       member do
         post :activate
+        post :review
+        post :judge
         post :feature
+        post :complete
         post :assign_reviewers
+        post :assign_judges
       end
     end
     resources :users

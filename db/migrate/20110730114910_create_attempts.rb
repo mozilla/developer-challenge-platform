@@ -6,6 +6,7 @@ class CreateAttempts < ActiveRecord::Migration
       t.references :language, :null => false
       t.string :repository_url
       t.text   :description, :null => false
+      t.boolean :shortlisted, :null => false, :default => false
       t.timestamps
     end
   end

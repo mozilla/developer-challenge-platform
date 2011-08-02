@@ -1,0 +1,76 @@
+<h2>Challenge attempts</h2>
+
+<% if @challenge.attempts.present? %>
+  
+  <%= form_tag judge_admin_challenge_path(@challenge) do %>
+  
+    <table width="100%">
+      <tr>
+        <th>Attempt/Challenge</th>
+        <th>User</th>
+        <th>Repository</th>
+        <th>Language</th>
+        <th>Reviewers</th>
+        <th>Score</th>
+        <th>&nbsp;</th>
+      </tr>
+      <% @challenge.attempts.each do |attempt| %>
+        <tr>
+          <td>Attempt <%= attempt.id %> on <%= link_to attempt.challenge.title, [:admin, attempt.challenge] %></td>
+          <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
+          <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
+          <td><%= attempt.language.name %></td>
+          <td><%= attempt.reviews.count %> (<%= attempt.reviews.pending.count %> pending)</td>
+          <td><%= attempt.review_score %></td>
+          <td><%= check_box_tag 'attempt_id[]' %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td style="text-align:right" colspan="7"><%= submit_tag 'Shortlist' %></td>
+      </tr>
+    </table>
+  
+  <% end %>
+  
+<% else %>
+  <i>There are currently no attempts</i>
+<% end %>
+
+<h2>Reviewers</h2>
+
+<div>
+  <p>
+    Pending review: 
+    <% @challenge.reviews.pending.collect{|x| x.user }.each do |reviewer| %>
+      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% end %>
+  </p>
+  <p>
+    Completed review:
+    <% @challenge.reviews.complete.collect{|x| x.user }.each do |reviewer| %>
+      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% end %>
+  </p>
+</div>
+
+<%= link_to 'Assign reviewers', '#', :onclick => "$('#assign-reviewers').toggle(); return false;" %>
+
+<div style="display:none" id="assign-reviewers">
+  <%= form_tag assign_reviewers_admin_challenge_path(@challenge) do %>
+    <table style="width:100%">
+      <tr>
+        <th>Name</th>
+        <th>Pending Reviews</th>
+        <th>&nbsp;</th>
+      </tr>
+      <% (User.reviewers - @challenge.reviewers).sort{|x| x.reviews.pending.count}.each do |reviewer| %>
+        <tr>
+          <td><%= link_to reviewer.name, [:admin, reviewer] %> (<%= reviewer.username %>)</td>
+          <td><%= reviewer.reviews.pending.count %></td>
+          <td><%= check_box_tag 'user_id[]', reviewer.id, @challenge.reviewers.include?(reviewer) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag 'Assign' %>
+  <% end %>
+</div>

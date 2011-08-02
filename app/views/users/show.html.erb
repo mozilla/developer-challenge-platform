@@ -36,3 +36,15 @@
     </div>
   <% end %>
 <% end %>
+
+<% if @user == current_user and current_user.judge? %>
+  <h2>Pending Judgements (<%= current_user.judgings.pending.count %>)</h2>
+  
+  <% @user.judgings.pending.each do |judging| %>
+    <div>
+      <%= link_to "Attempt #{judging.attempt.id}", [judging.challenge, judging.attempt] %> 
+      on <%= link_to judging.challenge.title, judging.challenge %> 
+      attempt by <%= link_to judging.attempt.user.name, judging.attempt.user %> (<%= judging.attempt.user.username %>)
+    </div>
+  <% end %>
+<% end %>

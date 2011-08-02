@@ -7,6 +7,8 @@ class Challenge < ActiveRecord::Base
   has_many :attempts
   has_many :reviews
   has_many :reviewers, :through => :reviews, :source => :user
+  has_many :judgings
+  has_many :judges, :through => :judgings, :source => :user
   
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
   
@@ -73,7 +75,19 @@ class Challenge < ActiveRecord::Base
       # TODO: store the admin user in the review and send message in Review after_create
       Message.create!( 
         :sender => admin_user, :recipient_username => reviewer.username, :recipient => reviewer, 
-        :subject => "Review assigned for #{attempt.challenge.title}", :body => 'Check your profile'
+        :subject => "Review: #{attempt.challenge.title}", :body => 'Check your profile'
+      )
+    end
+  end
+  
+  def assign_judge(admin_user, judge)
+    @attempts = self.attempts.sort{|x| x.reviews.count}[0..9] # TODO: counter cache
+    @attempts.each do |attempt| 
+      attempt.judgings.create!(:user => judge, :challenge => attempt.challenge)
+      # TODO: store the admin user in the review and send message in Judging after_create
+      Message.create!( 
+        :sender => admin_user, :recipient_username => judge.username, :recipient => judge, 
+        :subject => "Judge: #{attempt.challenge.title}", :body => 'Check your profile'
       )
     end
   end

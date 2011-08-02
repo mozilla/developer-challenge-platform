@@ -1,0 +1,65 @@
+<h2>Challenge attempts</h2>
+  
+<table width="100%">
+  <tr>
+    <th>Attempt/Challenge</th>
+    <th>User</th>
+    <th>Repository</th>
+    <th>Language</th>
+    <th>Judges</th>
+    <th>Score</th>
+    <th>&nbsp;</th>
+  </tr>
+  <% @challenge.attempts.shortlisted.each do |attempt| %>
+    <tr>
+      <td>Attempt <%= attempt.id %> on <%= link_to attempt.challenge.title, [:admin, attempt.challenge] %></td>
+      <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
+      <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
+      <td><%= attempt.language.name %></td>
+      <td><%= attempt.reviews.count %> (<%= attempt.reviews.pending.count %> pending)</td>
+      <td><%= attempt.judge_score %></td>
+      <td>-</td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'WRAP IT UP!', complete_admin_challenge_path(@challenge), :method => :post, :confirm => 'Are you sure? This will fix the results and close the challenge.' %>
+
+<h2>Judges</h2>
+
+<div>
+  <p>
+    Pending judging: 
+    <% @challenge.judgings.pending.collect{|x| x.user }.each do |reviewer| %>
+      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% end %>
+  </p>
+  <p>
+    Completed judging:
+    <% @challenge.judgings.complete.collect{|x| x.user }.each do |reviewer| %>
+      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% end %>
+  </p>
+</div>
+
+<%= link_to 'Assign judges', '#', :onclick => "$('#assign-reviewers').toggle(); return false;" %>
+
+<div style="display:none" id="assign-reviewers">
+  <%= form_tag assign_judges_admin_challenge_path(@challenge) do %>
+    <table style="width:100%">
+      <tr>
+        <th>Name</th>
+        <th>Pending Reviews</th>
+        <th>&nbsp;</th>
+      </tr>
+      <% (User.judges - @challenge.judges).sort{|x| x.reviews.pending.count}.each do |judge| %>
+        <tr>
+          <td><%= link_to judge.name, [:admin, judge] %> (<%= judge.username %>)</td>
+          <td><%= judge.judgings.pending.count %></td>
+          <td><%= check_box_tag 'user_id[]', judge.id, @challenge.judges.include?(judge) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag 'Assign' %>
+  <% end %>
+</div>

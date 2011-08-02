@@ -1,0 +1,24 @@
+<h2>Challenge attempts</h2>
+
+<% if @challenge.attempts.present? %>
+
+  <table width="100%">
+    <tr>
+      <th>Attempt/Challenge</th>
+      <th>User</th>
+      <th>Repository</th>
+      <th>Language</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @challenge.attempts.each do |attempt| %>
+      <tr>
+        <td>Attempt <%= attempt.id %> on <%= link_to attempt.challenge.title, [:admin, attempt.challenge] %></td>
+        <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
+        <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
+        <td><%= attempt.language.name %></td>
+    <% end %>
+  </table>
+  
+<% else %>
+  <i>There are currently no attempts</i>
+<% end %>
