@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :challenges
   has_many :attempts
+  
   before_validation :generate_auth_token, :on => :create
+  validates_uniqueness_of :email
+  
   delegate :name, :to => :profile
   
   def username

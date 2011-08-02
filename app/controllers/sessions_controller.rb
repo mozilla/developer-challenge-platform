@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         :value => user.auth_token, 
         :httponly => true
       }
-      redirect_back_or_default(:root)
+      redirect_back_or_default(new_user_profiles_url(@user))
     else
       @user.errors.add :password, 'Wrong'
       @user.errors.add :email unless user
