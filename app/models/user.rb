@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :challenges
   has_many :attempts
+  has_many :sent_messages, :foreign_key => 'sender_id', :class_name => 'Message'
+  has_many :received_messages, :foreign_key => 'recipient_id', :class_name => 'Message'
   
   before_validation :generate_auth_token, :on => :create
   validates_uniqueness_of :email

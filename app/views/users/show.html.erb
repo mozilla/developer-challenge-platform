@@ -1,5 +1,9 @@
 <h1><%= @user.name %> (<%= @user.username %>)</h1>
 
+<% if logged_in? and @user != current_user %>
+  <%= link_to 'Send a message', new_message_path(:recipient => @user.username) %>
+<% end %>
+
 <p><%= @user.profile.bio %></p>
 
 <% if @user.profile.website.present? %>

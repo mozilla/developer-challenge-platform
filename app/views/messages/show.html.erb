@@ -1,0 +1,5 @@
+<h1><%= @message.subject %></h1>
+
+<p>from <%= link_to @message.sender.username, @message.sender %> to <%= link_to @message.recipient.username, @message.recipient %>
+
+<p><%= @message.body %></p>

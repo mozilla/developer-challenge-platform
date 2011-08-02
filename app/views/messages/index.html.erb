@@ -1,0 +1,13 @@
+<h1>Messages</h1>
+
+<h2>Received</h2>
+
+<% @received.each do |message| %>
+  <div><%= link_to message.subject, message %> from <%= link_to message.sender.username, message.sender %> on <%= message.created_at.to_s(:long) %></div>
+<% end %>
+
+<h2>Sent</h2>
+
+<% @sent.each do |message| %>
+  <div><%= link_to message.subject, message %> to <%= link_to message.recipient.username, message.recipient %> on <%= message.created_at.to_s(:long) %></div>
+<% end %>

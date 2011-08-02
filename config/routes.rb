@@ -41,6 +41,8 @@ Mozchallenge::Application.routes.draw do
     end
   end
   
+  resources :messages
+  
   namespace :admin do
     root :to => 'challenges#index'
     resource :community, :controller => :community
