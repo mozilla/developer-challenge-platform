@@ -26,6 +26,7 @@
             <%= link_to 'activate', activate_admin_challenge_path(challenge), :method => :post %>  
           <% end %>
           <%= link_to 'edit', edit_admin_challenge_path(challenge) %>
+          <% unless challenge.feature? %><%= link_to 'feature', feature_admin_challenge_path(challenge), :method => :post %><% end %>
         </td>
       </tr>
     <% end %>

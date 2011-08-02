@@ -2,7 +2,7 @@ class Admin::ChallengesController < Admin::BaseController
   before_filter :challenge_requried, :except => [:index, :new, :create]
   
   def index
-    @challenges = Challenge.all # TODO: Pagination
+    @challenges = Challenge.admin # TODO: Pagination
   end
   
   def new
@@ -34,6 +34,11 @@ class Admin::ChallengesController < Admin::BaseController
   
   def activate
     @challenge.activate!
+    redirect_to :admin_challenges
+  end
+  
+  def feature
+    @challenge.feature!
     redirect_to :admin_challenges
   end
   

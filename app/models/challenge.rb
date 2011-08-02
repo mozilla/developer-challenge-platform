@@ -9,6 +9,7 @@ class Challenge < ActiveRecord::Base
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
   
   scope :community, where(:source => 'community')
+  scope :admin, where(:source => 'admin')
   scope :active, where(:state => 'active')
   scope :finished, where(:state => 'finished')
   scope :featured, where(:feature => true)

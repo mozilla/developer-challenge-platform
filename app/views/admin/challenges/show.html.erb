@@ -6,6 +6,24 @@
 
 <h2>Challenge attempts</h2>
 
-<% @challenge.attempts.each do |attempt| %>
-  <%= gravatar_for(attempt.user.email) %>
+<% if @challenge.attempts.present? %>
+
+  <table width="100%">
+    <tr>
+      <th>User</th>
+      <th>Repository</th>
+      <th>Language</
+      <th>&nbsp;</th>
+    </tr>
+    <% @challenge.attempts.each do |attempt| %>
+      <tr>
+        <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
+        <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
+        <td><%= attempt.language.name %></td>
+      </tr>
+    <% end %>
+  </table>
+  
+<% else %>
+  <i>There are currently no attempts</i>
 <% end %>

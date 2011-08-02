@@ -2,6 +2,7 @@ class AttemptsController < ApplicationController
   before_filter :authorize_user
   before_filter :challenge_requried
   before_filter :attempt_required, :except => [:new, :create]
+  before_filter :check_ownership, :only => [:edit, :update]
   
   def new
     @attempt = Attempt.new
@@ -31,5 +32,9 @@ class AttemptsController < ApplicationController
     
     def attempt_required
       @attempt = Attempt.find_by_id!(params[:id])
+    end
+    
+    def check_ownership
+      redirect_to :root unless @attempt.user == current_user
     end
 end
