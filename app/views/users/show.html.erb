@@ -13,5 +13,5 @@
 <h2>Challenges attempted</h2>
 
 <% @user.attempts.each do |attempt| %>
-  <div><%= link_to attempt.challenge.title, attempt.challenge %></div>
+  <div><%= link_to attempt.challenge.title, attempt.challenge %> <% if @user == current_user and attempt.challenge.open? %><%= link_to 'Edit your entry', edit_challenge_attempt_path(attempt.challenge, attempt) %><% end %></div>
 <% end %>

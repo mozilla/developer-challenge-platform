@@ -18,7 +18,7 @@
       <div>
         <% if logged_in? %>
           <%= link_to 'Settings' %> |
-          <%= link_to 'Log out', :session , :method => :delete %> <%= gravatar_for(current_user.email, :size => 16) %> <%= current_user.username %>
+          <%= link_to 'Log out', :session , :method => :delete %> <%= gravatar_for(current_user.email, :size => 16) %> <%= link_to current_user.username, current_user %>
         <% else %>  
           <%= link_to image_tag('sign_in_green.png', :id => 'sign-in-button'), '#', :id => 'sign-in' %>
         <% end %>
