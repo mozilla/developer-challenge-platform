@@ -10,7 +10,7 @@
   </tr>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.name, [:admin, user] %> (<%= user.username %>)</td>
+      <td><%= link_to "#{User.try(:name)} (#{user.username})", [:admin, user] %></td>
       <td><%= user.email %></td>
       <td>
         <%= user.admin? ? 'Admin' : '' %>
