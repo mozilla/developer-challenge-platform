@@ -1,6 +1,6 @@
 <%= render :partial => 'nav' %>
 
-<h1><%= @user.name %> (<%= @user.username %>)</h1>
+<h1><%= @user.try(:name) %> (<%= @user.username %>)</h1>
 
 <p><%= link_to 'Send a message', new_message_path(:recipient => @user.username) %>
 
