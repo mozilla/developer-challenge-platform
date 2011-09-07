@@ -21,8 +21,6 @@
           <%= link_to 'Messages', :messages %> |
           <%= link_to 'Log out', :session , :method => :delete %> <%= gravatar_for(current_user.email, :size => 16) %> <%= link_to current_user.username, current_user %>
         <% else %>
-          <%= link_to 'Github', '/auth/github' %>
-          <%= link_to image_tag('sign_in_green.png', :id => 'sign-in-button'), '#', :id => 'sign-in' %>
           <%= link_to 'Sign up', :new_user %>
           <%= link_to 'Log in', :new_session %>
         <% end %>
@@ -41,7 +39,6 @@
     <small>&copy; 2011 Mozilla Labs. All rights reserved</small>
   </footer>
   
-  <%= javascript_include_tag 'https://browserid.org/include.js' unless logged_in? %>
   <%= yield :bottom_script %>
 </body>
 </html>

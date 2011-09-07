@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   end
   
   def browser_id
-    store_location(params[:location])
+    #store_location(params[:location])
     
     res = JSON.parse(
       RestClient.post('https://browserid.org/verify', :assertion => params[:assertion], :audience => request.host)
