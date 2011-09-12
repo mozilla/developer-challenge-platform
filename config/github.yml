@@ -1,9 +1,0 @@
-development:
-  client_id: 59af4a769747c6cb9296
-  secret: a3729340ed21ab7d644ac4b90529f1197565173b
-production:
-  client_id: 7be8552ca3bcfcaa1c9e
-  secret: 828b20133b14d2ab18a0ed15578636b5888b7de7
-test:
-  client_id: 1
-  secret: shh
