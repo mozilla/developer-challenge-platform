@@ -8,10 +8,26 @@
 
 <% if @user.profile.website.present? %>
   Website: <%= link_to @user.profile.website, @user.profile.website %>
-<% end %>
+<% end %> 
 
 <% if @user.profile.twitter.present? %>
-  Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %>
+  <p>Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %></p>
+<% end %>
+
+<% if current_user.profile.github? %>
+  <p>
+    GitHub: <%= link_to current_user.profile.github_username, current_user.profile.github_url %> | 
+    <%= current_user.profile.github_public_repo_count %> Public Repositories |
+    <%= current_user.profile.github_followers_count %> Followers
+  </p>
+<% end %>
+
+<% if current_user.profile.twitter? %>
+  <p>Twitter: <%= link_to "@#{current_user.profile.twitter_username}", "https://twitter.com/#{current_user.profile.twitter_username}" %></p>
+<% end %>
+
+<% if @user == current_user %>
+  <div><%= render :partial => 'connections' %></div>
 <% end %>
 
 <h2>Challenges attempted</h2>

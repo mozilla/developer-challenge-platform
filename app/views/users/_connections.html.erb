@@ -1,0 +1,17 @@
+<h2>Connections</h2>
+
+<ul>
+  
+  <% if current_user.profile.twitter? %>
+    <li>You have connected with Twitter</li>
+  <% else %>
+    <li><%= link_to 'Connect Twitter Account', '/auth/twitter' %></li>
+  <% end %>
+  
+  <% if current_user.profile.github? %>
+    <li>You have connected with GitHub</li>
+  <% else %>
+    <li><%= link_to 'Connect GitHub Account', '/auth/github' %></li>
+  <% end %>
+  
+</ul>

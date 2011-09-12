@@ -25,6 +25,9 @@ Mozchallenge::Application.routes.draw do
   #     end
   #   end
   
+  match '/auth/github/callback' => 'profiles#github'
+  match '/auth/twitter/callback' => 'profiles#twitter'
+  
   resource :community, :controller => :community
   
   resources :users do

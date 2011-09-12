@@ -4,5 +4,7 @@ log/*.log
 tmp/
 .sass-cache/
 config/database.yml
+config/github.yml
+config/twitter.yml
 db/schema.rb
 .rvmrc
