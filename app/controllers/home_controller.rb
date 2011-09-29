@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @featured_challenge =  Challenge.featured.first
-    @recent_challenges = Challenge.finished.limit(6).all - [@featured_challenge]
+    @active_challenges = Challenge.active
+    @past_challenges = Challenge.finished.limit(6).all
   end
 end

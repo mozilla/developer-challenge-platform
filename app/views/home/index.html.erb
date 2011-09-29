@@ -4,6 +4,14 @@
   <p><%= @featured_challenge.abstract %></p>
 <% end %>
 
-<% @recent_challenges.each do |challenge| %>
-  <div><%= challenge.title %> <%= challenge.ends_at.to_date.to_s(:long) %></div>
+<h2>Active Challenges</h2>
+
+<% @active_challenges.each do |challenge| %>
+  <div><%= link_to challenge.title, challenge %> Ends on <%= challenge.ends_at.to_date.to_s(:long) %></div>
+<% end %>
+
+<h2>Past Challenges</h2>
+
+<% @past_challenges.each do |challenge| %>
+  <div><%= link_to challenge.title, challenge %> <%= challenge.ends_at.to_date.to_s(:long) %></div>
 <% end %>

@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password
   attr_accessible :judge, :admin, :reviewer, :as => :admin
   
+  scope :ordinary, where(:admin => false).where(:reviewer => false).where(:judge => false)
+  scope :admins, where(:admin => true)
   scope :reviewers, where(:reviewer => true)
   scope :judges, where(:judge => true)
   

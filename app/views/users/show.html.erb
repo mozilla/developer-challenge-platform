@@ -14,7 +14,7 @@
   <p>Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %></p>
 <% end %>
 
-<% if current_user.profile.github? %>
+<% if @user.profile.github? %>
   <p>
     GitHub: <%= link_to current_user.profile.github_username, current_user.profile.github_url %> | 
     <%= current_user.profile.github_public_repo_count %> Public Repositories |
@@ -22,7 +22,7 @@
   </p>
 <% end %>
 
-<% if current_user.profile.twitter? %>
+<% if @user.profile.twitter? %>
   <p>Twitter: <%= link_to "@#{current_user.profile.twitter_username}", "https://twitter.com/#{current_user.profile.twitter_username}" %></p>
 <% end %>
 

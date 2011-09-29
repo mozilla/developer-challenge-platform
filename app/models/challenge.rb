@@ -12,8 +12,11 @@ class Challenge < ActiveRecord::Base
   
   validates_presence_of :title, :abstract, :level_id, :category_id, :platform_id, :user_id
   
+  default_scope :order => "activated_at DESC"
+  
   scope :community, where(:source => 'community')
   scope :admin, where(:source => 'admin')
+  scope :pending, where(:state => 'pending')
   scope :active, where(:state => 'active')
   scope :finished, where(:state => 'finished')
   scope :featured, where(:feature => true)
@@ -46,8 +49,20 @@ class Challenge < ActiveRecord::Base
     self.state == 'reviewing'
   end
   
-  def open?
-    self.active? #and Time.now.utc > self.starts_at and Time.now.utc < self.ends_at
+  def reviewing?
+    self.state == 'judging'
+  end
+  
+  def open_for_submissions?
+    self.active? and Time.now.utc > self.activated_at and Time.now.utc < self.ends_at
+  end
+  
+  def open_for_voting?
+    open_for_comments? and (active? or reviewing? or judging?)
+  end
+  
+  def open_for_comments?
+     Time.now.utc > self.ends_at
   end
   
   def days_remaining

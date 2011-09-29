@@ -1,17 +1,37 @@
 <h1><%= @challenge.title %></h1>
 
-<p><%= @challenge.abstract %></p>
+<p>State: <%= @challenge.state %> | Level: <%= @challenge.level.name %> | Category: <%= @challenge.category.name %> | Ends: <%= @challenge.ends_at.to_date.to_s(:long) %> | Created By: <%= link_to @challenge.user.username, @challenge.user %> | Official?: <%= @challenge.user.admin? %></p>
+
+<p><%= raw RDiscount.new(@challenge.abstract).to_html %></p>
 
 <div>
-  <% if @challenge.open? %>
+  <% if @challenge.open_for_submissions? %>
     <%= link_to 'Enter your solution', new_challenge_attempt_path(@challenge) %>
   <% else %>
     <i>This challenge is not currently accepting solutions</i>
   <% end %>
 </div>
 
-<h2>Challenge attempts</h2>
+<h2>Sponsors</h2>
 
-<% @challenge.attempts.each do |attempt| %>
-  <%= link_to gravatar_for(attempt.user.email), attempt.user %>
+<p><%= raw RDiscount.new(@challenge.sponsors).to_html if @challenge.sponsors %></p>
+
+<h2>Prizes</h2>
+
+<p><%= raw RDiscount.new(@challenge.prizes).to_html if @challenge.prizes %></p>
+
+<% if @challenge.open_for_comments? %>
+
+  <h2>Challenge attempts</h2>
+
+  <% @challenge.attempts.each do |attempt| %>
+    <%= link_to gravatar_for(attempt.user.email), attempt.user %>
+  <% end %>
+
+  <h2>Comments</h2>
+  
+  <%= render :partial => 'disqus' %>
+
+<% else %>
+  <p>This challenge is not open to view attempts, comments or voting yet</p>
 <% end %>

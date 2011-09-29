@@ -1,6 +1,6 @@
 <h1><%= @challenge.title %></h1>
 
-<p><%= @challenge.abstract %></p>
+<p><%= raw RDiscount.new(@challenge.abstract).to_html %></p>
 
 <h1>Submit your entry</h1>
 

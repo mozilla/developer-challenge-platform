@@ -12,6 +12,8 @@ class CreateChallenges < ActiveRecord::Migration
       t.string   :title, :null => false
       t.text     :abstract, :null => false
       t.text     :resources
+      t.text     :sponsors
+      t.text     :prizes
       t.datetime :activated_at
       t.boolean  :feature, :default => false, :null => false
       

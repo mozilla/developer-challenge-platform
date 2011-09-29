@@ -15,6 +15,7 @@ gem 'colored'
 gem 'state_machine'
 gem 'rest-client'
 gem 'oa-oauth'
+gem 'rdiscount'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
