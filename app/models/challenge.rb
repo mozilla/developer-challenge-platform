@@ -45,11 +45,11 @@ class Challenge < ActiveRecord::Base
     self.state == 'active'
   end
   
-  def reviewing?
+  def in_review?
     self.state == 'reviewing'
   end
   
-  def reviewing?
+  def in_judge?
     self.state == 'judging'
   end
   

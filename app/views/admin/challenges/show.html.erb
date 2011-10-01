@@ -12,6 +12,6 @@
 <% end %>
 
 <%= render :partial => 'state_active' if @challenge.active? %>
-<%= render :partial => 'state_reviewing' if @challenge.reviewing? %>
-<%= render :partial => 'state_judging' if @challenge.judging? %>
+<%= render :partial => 'state_reviewing' if @challenge.in_review? %>
+<%= render :partial => 'state_judging' if @challenge.in_judge? %>
 <%= render :partial => 'state_finished' if @challenge.finished? %>
