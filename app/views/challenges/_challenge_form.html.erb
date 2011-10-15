@@ -3,5 +3,8 @@
 <div><label>Difficulty Level</label><%= f.select :level_id, options_for_select(Level.all.collect{|x| [x.name, x.id]}, f.object.level_id) %></div>
 <div><label>Category</label><%= f.select :category_id, options_for_select(Category.all.collect{|x| [x.name, x.id]}, f.object.category_id) %></div>
 <div><label>Platform</label><%= f.select :platform_id, options_for_select(Platform.all.collect{|x| [x.name, x.id]}, f.object.platform_id) %></div>
-<div><label>Suggested duration</label><%= f.select :duration_id, options_for_select(Duration.all.collect{|x| [x.name, x.id]}, f.object.duration_id) %></div>
+<!-- <div><label>Suggested duration</label><%= f.select :duration_id, options_for_select(Duration.all.collect{|x| [x.name, x.id]}, f.object.duration_id) %></div> -->
+<div><label>Start Date</label><%= f.datetime_select :starts_at %></div>
+<div><label>Ends At</label><%= f.datetime_select :starts_at %></div>
+<div><label>End Date</label><%= f.select :duration_id, options_for_select(Duration.all.collect{|x| [x.name, x.id]}, f.object.duration_id) %></div>
 <div><label>Resources</label><%= f.text_area :resources %></div>
