@@ -29,7 +29,7 @@
         <% end %>
       </div>
       <nav>
-        <%= link_to 'Home', :root %> | <%= link_to 'Community', :community %> 
+        <%= link_to 'Home', :root %> | <%= link_to 'Submit a Challenge', :new_challenge %> 
         <% if logged_in? and current_user.admin? %> | <%= link_to 'Admin', :admin_root %><% end %>
       </nav>
     </div>

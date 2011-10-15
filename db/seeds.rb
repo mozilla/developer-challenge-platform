@@ -1,14 +1,3 @@
-# Admin Users
-
-admins = [
-  'moomerman@gmail.com'
-]
-admins.each do |x| 
-  user = User.new(:email => x, :password => SecureRandom.urlsafe_base64)
-  user.admin = true
-  user.save!
-end
-
 # Levels
 
 levels = [
