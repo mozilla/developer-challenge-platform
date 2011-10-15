@@ -30,14 +30,14 @@
 <div>
   <p>
     Pending judging: 
-    <% @challenge.judgings.pending.collect{|x| x.user }.each do |reviewer| %>
-      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% @challenge.judgings.pending.each do |judging| %>
+      <div><%= link_to judging.user.name, [:admin, judging.user] %> is judging Attempt <%= judging.attempt.id %></div>
     <% end %>
   </p>
   <p>
     Completed judging:
-    <% @challenge.judgings.complete.collect{|x| x.user }.each do |reviewer| %>
-      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% @challenge.judgings.complete.each do |judging| %>
+      <div><%= link_to judging.user.name, [:admin, judging.user] %> has judged Attempt <%= judging.attempt.id %></div>
     <% end %>
   </p>
 </div>
