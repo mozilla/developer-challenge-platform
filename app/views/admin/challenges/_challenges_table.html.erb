@@ -3,6 +3,7 @@
   <table width="100%">
     <tr>
       <th>Challenge Title</th>
+      <th>Source</th>
       <th>Creator</th>
       <th>State</th>
       <th>Duration</th>
@@ -12,6 +13,7 @@
     <% challenges.each do |challenge| %>
       <tr>
         <td><%= link_to challenge.title, [:admin, challenge] %></td>
+        <td><%= challenge.source %></td>
         <td><%= link_to challenge.user.username, [:admin, challenge.user] %></td>
         <td><%= challenge.state.upcase %></td>
         <td><%= challenge.duration.name %></td>
