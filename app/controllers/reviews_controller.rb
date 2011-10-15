@@ -5,7 +5,8 @@ class ReviewsController < ApplicationController
   before_filter :reviewer_required
   
   def update
-    @review.update_attributes(params[:review])
+    @review.update_attributes!(params[:review])
+    redirect_to @review.user, :notice => 'Your review has been saved'
   end
   
   private
@@ -23,6 +24,5 @@ class ReviewsController < ApplicationController
     
     def reviewer_required
       redirect_to :root unless current_user.reviews.include? @review
-      redirect_to @review.user
     end
 end

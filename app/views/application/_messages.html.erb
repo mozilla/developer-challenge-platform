@@ -6,3 +6,7 @@
     <div style="background-color:yellow">You have <%= current_user.judgings.pending.count %> <%= link_to 'pending judgings', user_path(current_user) %>.</div>
   <% end %>
 <% end %>
+
+<% if flash[:notice] %>
+  <div style="background-color:green"><%= flash[:notice] %></div>
+<% end %>

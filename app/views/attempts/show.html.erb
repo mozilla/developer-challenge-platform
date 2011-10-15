@@ -2,7 +2,7 @@
 
 Repository: <%= @attempt.repository_url %>
 
-<p><%= @attempt.description %></p>
+<p><%= raw markdown(@attempt.description) %></p>
 
 <% if current_user.reviewer? and review = current_user.reviewing?(@attempt) %>
   <h2>Review</h2>

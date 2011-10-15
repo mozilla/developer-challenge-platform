@@ -6,7 +6,7 @@ class JudgingsController < ApplicationController
   
   def update
     @judging.update_attributes(params[:judging])
-    redirect_to @judging.user
+    redirect_to @judging.user, :notice => 'Your judging has been saved'
   end
   
   private
