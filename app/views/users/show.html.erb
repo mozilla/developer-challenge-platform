@@ -4,14 +4,23 @@
   <%= link_to 'Send a message', new_message_path(:recipient => @user.username) %>
 <% end %>
 
+<h2>Date Joined</h2>
+<%= @user.created_at.to_date.to_s(:long) %>
+Has entered <%= @user.attempts.count %> challenges to date
+
+<h2>Bio</h2>
+
 <p><%= @user.profile.bio %></p>
 
+<h2>Website</h2>
+
 <% if @user.profile.website.present? %>
-  Website: <%= link_to @user.profile.website, @user.profile.website %>
+  <%= link_to @user.profile.website, @user.profile.website %>
 <% end %> 
 
+<h2>Twitter Profile</h2>
 <% if @user.profile.twitter.present? %>
-  <p>Twitter: <%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %></p>
+  <p><%= link_to @user.profile.twitter, "http://twitter.com/#{@user.profile.twitter.gsub(/^@/, '')}" %></p>
 <% end %>
 
 <% if @user.profile.github? %>
@@ -63,4 +72,13 @@
       attempt by <%= link_to judging.attempt.user.name, judging.attempt.user %> (<%= judging.attempt.user.username %>)
     </div>
   <% end %>
+<% end %>
+
+<h2>Recent Activity</h2>
+
+<% @user.votes.each do |vote| %>
+  <p>Voted thumbs up on a solution in <%= link_to vote.attempt.challenge.title, [vote.attempt.challenge, vote.attempt] %></p>
+<% end %>
+<% @user.attempts.each do |attempt| %>
+  <p>Entered a solution for <%= link_to attempt.challenge.title, attempt.challenge %></p>
 <% end %>

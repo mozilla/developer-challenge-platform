@@ -17,8 +17,7 @@
     <div style="float:right; text-align:right">
       <div>
         <% if logged_in? %>
-          <%= link_to 'Settings' %> |
-          <%= link_to 'Messages', :messages %> |
+          <%= link_to 'Messages', :messages %> [<%= current_user.received_messages.count %>] |
           <%= link_to 'Log out', :session , :method => :delete %> <%= gravatar_for(current_user.email, :size => 16) %> <%= link_to current_user.username, current_user %>
           <% if (count = (current_user.reviews.pending.count + current_user.judgings.pending.count)) > 0 %>
             [<%= count %>]
