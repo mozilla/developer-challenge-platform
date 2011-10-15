@@ -7,6 +7,7 @@
     <th>Repository</th>
     <th>Language</th>
     <th>Judges</th>
+    <th>Public Vote</th>
     <th>Score</th>
     <th>&nbsp;</th>
   </tr>
@@ -17,6 +18,7 @@
       <td><%= link_to attempt.repository_url, attempt.repository_url %></td>
       <td><%= attempt.language.name %></td>
       <td><%= attempt.reviews.count %> (<%= attempt.reviews.pending.count %> pending)</td>
+      <td><%= attempt.votes_count %></td>
       <td><%= attempt.judge_score %></td>
       <td>-</td>
     </tr>
