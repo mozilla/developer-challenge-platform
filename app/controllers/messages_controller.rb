@@ -21,9 +21,9 @@ class MessagesController < ApplicationController
     recipients = params[:message][:recipient_username].split(',')
     recipients.each do |r|
       recipient = Profile.find_by_username(r).try(:user)
-      Message.create!(params[:message].merge(:sender => current_user, :recipient => recipient)) if recipient and !recipient == current_user
+      Message.create!(params[:message].merge(:sender => current_user, :recipient => recipient)) if recipient and (recipient != current_user)
     end
-    redirect_to :messages
+    redirect_to :messages, :notice => 'Message sent'
   end
   
   def show
@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
     end
     
     def check_ownership
-      redirect_to :root unless @message.recipient  == current_user or @message.sender == current_user
+      redirect_to :root unless @message.recipient == current_user or @message.sender == current_user
     end
       
 end
