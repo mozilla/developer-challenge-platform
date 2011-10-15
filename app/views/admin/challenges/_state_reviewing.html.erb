@@ -14,7 +14,7 @@
         <th>Score</th>
         <th>&nbsp;</th>
       </tr>
-      <% @challenge.attempts.each do |attempt| %>
+      <% @challenge.attempts.sort_by{|x| x.review_score}.reverse.each do |attempt| %>
         <tr>
           <td>Attempt <%= attempt.id %> on <%= link_to attempt.challenge.title, [:admin, attempt.challenge] %></td>
           <td><%= link_to "#{attempt.user.name} (#{attempt.user.username})", [:admin, attempt.user] %></td>
@@ -22,7 +22,7 @@
           <td><%= attempt.language.name %></td>
           <td><%= attempt.reviews.count %> (<%= attempt.reviews.pending.count %> pending)</td>
           <td><%= attempt.review_score %></td>
-          <td><%= check_box_tag 'attempt_id[]' %></td>
+          <td><%= check_box_tag 'attempt_id[]', attempt.id %></td>
         </tr>
       <% end %>
       <tr>
@@ -41,13 +41,13 @@
 <div>
   <p>
     Pending review: 
-    <% @challenge.reviews.pending.collect{|x| x.user }.each do |reviewer| %>
+    <% @challenge.reviews.pending.collect{|x| x.user }.uniq.each do |reviewer| %>
       <%= link_to reviewer.name, [:admin, reviewer] %>
     <% end %>
   </p>
   <p>
     Completed review:
-    <% @challenge.reviews.complete.collect{|x| x.user }.each do |reviewer| %>
+    <% @challenge.reviews.complete.collect{|x| x.user }.uniq.each do |reviewer| %>
       <%= link_to reviewer.name, [:admin, reviewer] %>
     <% end %>
   </p>
