@@ -1,0 +1,8 @@
+<% if logged_in? %>
+  <% if current_user.reviews.pending.present? %>
+    <div style="background-color:yellow">You have <%= current_user.reviews.pending.count %> <%= link_to 'pending reviews', user_path(current_user) %>.</div>
+  <% end %>
+  <% if current_user.judgings.pending.present? %>
+    <div style="background-color:yellow">You have <%= current_user.judgings.pending.count %> <%= link_to 'pending judgings', user_path(current_user) %>.</div>
+  <% end %>
+<% end %>

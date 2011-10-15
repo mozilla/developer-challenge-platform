@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :logged_in?, :current_user
+  before_filter :progress_challenges
   
   private
     def current_user
@@ -25,5 +26,14 @@ class ApplicationController < ActionController::Base
         store_location
         redirect_to :new_session, :notice => 'You need to log in to do that'
       end
+    end
+    
+    def progress_challenges
+      # checks for challenges that need progressing to the next stage
+      # this would normally be done in a background job but we're
+      # fudging it for this prototype
+      
+      # progress challenges that have passed their end date to review stage
+      #Challenge.active.where('ends_at < now()').each{|x| x.review!}
     end
 end
