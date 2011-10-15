@@ -11,7 +11,7 @@ class AttemptsController < ApplicationController
   def create
     @attempt = Attempt.new(params[:attempt].merge(:challenge => @challenge, :user => current_user))
     if @attempt.save
-      redirect_to @challenge
+      redirect_to @challenge, :notice => 'Thank you for your submission'
     else
       render :new
     end
