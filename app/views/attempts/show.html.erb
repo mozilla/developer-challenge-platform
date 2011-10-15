@@ -9,7 +9,7 @@ Repository: <%= @attempt.repository_url %>
   
   <%= form_for [@challenge, @attempt, review] do |f| %>
     <div><label>Approve</label><%= f.radio_button :score, 1 %> Yes <%= f.radio_button :score, 0 %> No 
-    <div><label>Comment</label><%= f.text_area :comment %></div>
+    <div><label>Comment</label><%= f.text_area :comment %><br/>Your comment will be sent to the user</div>
     <div><%= f.submit 'Send' %></div>
   <% end %>
 <% end %>

@@ -43,14 +43,14 @@
 <div>
   <p>
     Pending review: 
-    <% @challenge.reviews.pending.collect{|x| x.user }.uniq.each do |reviewer| %>
-      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% @challenge.reviews.pending.each do |review| %>
+      <div><%= link_to review.user.name, [:admin, review.user] %> is reviewing attempt <%= review.attempt.id %></div>
     <% end %>
   </p>
   <p>
     Completed review:
-    <% @challenge.reviews.complete.collect{|x| x.user }.uniq.each do |reviewer| %>
-      <%= link_to reviewer.name, [:admin, reviewer] %>
+    <% @challenge.reviews.complete.each do |review| %>
+      <div><%= link_to review.user.name, [:admin, review.user] %> has reviewed attempt <%= review.attempt.id %></div>
     <% end %>
   </p>
 </div>

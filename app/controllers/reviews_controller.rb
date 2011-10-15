@@ -6,6 +6,10 @@ class ReviewsController < ApplicationController
   
   def update
     @review.update_attributes!(params[:review])
+    Message.create!( 
+      :sender => @review.user, :recipient_username => @review.attempt.user.username, :recipient => @review.attempt.user, 
+      :subject => "Review Comment for: #{@review.attempt.challenge.title}", :body => @review.comment
+    )
     redirect_to @review.user, :notice => 'Your review has been saved'
   end
   
