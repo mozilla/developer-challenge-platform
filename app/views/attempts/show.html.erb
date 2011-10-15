@@ -22,7 +22,7 @@ Repository: <%= @attempt.repository_url %>
     <div><label>Originality/Innovation (1-10)</label><%= f.text_field :score2 %></div>
     <div><label>Practicality (1-10)</label><%= f.text_field :score3 %></div>
     <div><label>Completeness (1-10)</label><%= f.text_field :score4 %></div>
-    <div><label>Comment</label><%= f.text_area :comment %></div>
+    <div><label>Comment</label><%= f.text_area :comment %><br/>Your comment will be sent to the user</div>
     <div><%= f.submit 'Send' %></div>
   <% end %>
 <% end %>

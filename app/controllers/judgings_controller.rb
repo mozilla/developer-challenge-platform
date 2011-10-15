@@ -6,6 +6,10 @@ class JudgingsController < ApplicationController
   
   def update
     @judging.update_attributes(params[:judging])
+    Message.create!( 
+      :sender => @judging.user, :recipient_username => @judging.attempt.user.username, :recipient => @judging.attempt.user, 
+      :subject => "Judging Comment for: #{@judging.attempt.challenge.title}", :body => @judging.comment
+    )
     redirect_to @judging.user, :notice => 'Your judging has been saved'
   end
   
