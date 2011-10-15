@@ -16,6 +16,6 @@ class Attempt < ActiveRecord::Base
   
   def judge_score
     return 0.0 if self.judgings.complete.empty?
-    self.judgings.sum(:score).to_f / self.judgings.complete.count.to_f
+    (self.judgings.sum(:score) + self.judgings.sum(:score2) + self.judgings.sum(:score3) + self.judgings.sum(:score4)).to_f / 4.to_f / self.judgings.complete.count.to_f
   end
 end

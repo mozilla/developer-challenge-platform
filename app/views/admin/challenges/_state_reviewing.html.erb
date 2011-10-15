@@ -11,7 +11,7 @@
         <th>Repository</th>
         <th>Language</th>
         <th>Reviewers</th>
-        <th>Score</th>
+        <th>Yes Count</th>
         <th>&nbsp;</th>
       </tr>
       <% @challenge.attempts.sort_by{|x| x.review_score}.reverse.each do |attempt| %>
