@@ -25,12 +25,8 @@
   <h2>Challenge attempts</h2>
 
   <% @challenge.attempts.each do |attempt| %>
-    <%= link_to gravatar_for(attempt.user.email), attempt.user %>
+    <%= link_to gravatar_for(attempt.user.email), [@challenge, attempt] %>
   <% end %>
-
-  <h2>Comments</h2>
-  
-  <%= render :partial => 'disqus' %>
 
 <% else %>
   <p>This challenge is not open to view attempts, comments or voting yet</p>

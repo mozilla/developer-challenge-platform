@@ -14,6 +14,7 @@ class Challenge < ActiveRecord::Base
   
   default_scope :order => "activated_at DESC"
   
+  scope :open, where("state != 'pending' and state != 'active' and state != 'finished'")
   scope :community, where(:source => 'community')
   scope :admin, where(:source => 'admin')
   scope :pending, where(:state => 'pending')

@@ -36,6 +36,7 @@ Mozchallenge::Application.routes.draw do
   
   resources :challenges do
     resources :attempts do
+      resources :votes
       resources :reviews
       resources :judgings
     end

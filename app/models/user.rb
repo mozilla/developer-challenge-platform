@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :received_messages, :foreign_key => 'recipient_id', :class_name => 'Message'
   has_many :reviews
   has_many :judgings
+  has_many :votes
   
   before_validation :generate_auth_token, :on => :create
   validates_uniqueness_of :email

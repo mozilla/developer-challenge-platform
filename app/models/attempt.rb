@@ -4,6 +4,7 @@ class Attempt < ActiveRecord::Base
   belongs_to :language
   has_many :reviews
   has_many :judgings
+  has_many :votes
   
   validates_presence_of :description
   

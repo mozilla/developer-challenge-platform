@@ -26,3 +26,19 @@ Repository: <%= @attempt.repository_url %>
     <div><%= f.submit 'Send' %></div>
   <% end %>
 <% end %>
+
+<% if @attempt.challenge.open_for_comments? %>
+
+  <p>
+    Public votes: <%= @attempt.votes_count %> 
+    <% unless logged_in? and @attempt.votes.where(:user_id => current_user.id) %>
+      <%= link_to 'VOTE UP!', [@attempt.challenge, @attempt, Vote.new], :method => :post %>
+    <% else %>
+      (you have voted)
+    <% end %>
+  </p>
+
+  <h2>Comments</h2>
+  
+  <%= render :partial => 'disqus' %>
+<% end %>

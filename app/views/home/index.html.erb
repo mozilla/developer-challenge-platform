@@ -10,6 +10,13 @@
   <div><%= link_to challenge.title, challenge %> Ends on <%= challenge.ends_at.to_date.to_s(:long) %></div>
 <% end %>
 
+<h2>Being Reviewed / Judged</h2>
+
+<% @open_challenges.each do |challenge| %>
+  <div><%= link_to challenge.title, challenge %> Ends on <%= challenge.ends_at.to_date.to_s(:long) %></div>
+<% end %>
+
+
 <h2>Past Challenges</h2>
 
 <% @past_challenges.each do |challenge| %>
